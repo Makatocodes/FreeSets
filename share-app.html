@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Share FreeSets</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body class="bg-gray-100 flex flex-col h-screen">
+
+  <!-- Header -->
+  <div class="bg-gradient-to-r from-teal-500 to-teal-400 text-white p-4 flex items-center shadow-md">
+    <button onclick="history.back()" class="mr-3">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h1 class="text-lg font-semibold">Share App</h1>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 overflow-y-auto p-6 pb-28 text-center">
+    <!-- Logo -->
+    <div class="flex justify-center mt-6 mb-3">
+      <img src="https://i.imgur.com/jC4V1Ul.png" alt="FreeSets Logo" class="w-24 h-24 rounded-full shadow-md">
+    </div>
+
+    <!-- Title -->
+    <h2 class="text-xl font-semibold text-gray-800">Share FreeSets</h2>
+    <p class="text-gray-500 text-sm mb-6">Invite your friends to discover creative presets!</p>
+
+    <!-- QR Code -->
+    <div class="flex justify-center mb-5">
+      <div class="bg-white p-4 rounded-2xl shadow-md">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://freesets.app/invite&size=150x150" alt="QR Code" class="w-36 h-36">
+      </div>
+    </div>
+
+    <!-- Share Buttons -->
+    <div class="grid grid-cols-2 gap-4 mb-6">
+      <button onclick="shareTo('facebook')" class="flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-xl shadow transition">
+        <i class="fab fa-facebook-f text-lg"></i>
+        <span>Facebook</span>
+      </button>
+
+      <button onclick="shareTo('twitter')" class="flex items-center justify-center space-x-3 bg-sky-500 hover:bg-sky-600 text-white p-3 rounded-xl shadow transition">
+        <i class="fab fa-x-twitter text-lg"></i>
+        <span>X (Twitter)</span>
+      </button>
+
+      <button onclick="shareTo('whatsapp')" class="flex items-center justify-center space-x-3 bg-green-500 hover:bg-green-600 text-white p-3 rounded-xl shadow transition">
+        <i class="fab fa-whatsapp text-lg"></i>
+        <span>WhatsApp</span>
+      </button>
+
+      <button onclick="shareTo('messenger')" class="flex items-center justify-center space-x-3 bg-indigo-500 hover:bg-indigo-600 text-white p-3 rounded-xl shadow transition">
+        <i class="fab fa-facebook-messenger text-lg"></i>
+        <span>Messenger</span>
+      </button>
+    </div>
+
+    <!-- Copy Link Section -->
+    <div class="bg-white rounded-2xl p-4 shadow flex items-center justify-between mb-4">
+      <div class="text-left">
+        <p class="text-sm text-gray-600">Your FreeSets Link</p>
+        <p id="shareLink" class="font-semibold text-teal-500 text-sm break-all">https://freesets.app/invite</p>
+      </div>
+      <button onclick="copyLink()" class="bg-teal-500 hover:bg-teal-600 text-white py-2 px-3 rounded-lg text-sm">
+        Copy
+      </button>
+    </div>
+
+    <!-- Info Text -->
+    <p class="text-gray-500 text-xs px-4">
+      Scan the QR code or share your link to invite others to FreeSets!
+    </p>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="fixed bottom-0 w-full bg-black shadow-md border-t flex justify-around items-center py-2">
+    <a href="presets.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-layer-group text-xl"></i>
+      <span class="text-xs">Presets</span>
+    </a>
+
+    <a href="upload.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-upload text-xl"></i>
+      <span class="text-xs">Upload</span>
+    </a>
+
+    <!-- Centered Home Button -->
+    <a href="freeset.html" class="nav-item relative -mt-8">
+      <div class="bg-teal-500 text-white w-14 h-14 flex items-center justify-center rounded-full shadow-lg border-4 border-white">
+        <i class="fas fa-home text-2xl"></i>
+      </div>
+    </a>
+
+    <a href="favorite.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-heart text-xl"></i>
+      <span class="text-xs">Favorites</span>
+    </a>
+
+    <a href="profile.html" class="nav-item flex flex-col items-center text-teal-500">
+      <i class="fas fa-user text-xl"></i>
+      <span class="text-xs">Profile</span>
+    </a>
+  </nav>
+
+  <!-- Script -->
+  <script>
+    function shareTo(platform) {
+      const url = "https://freesets.app/invite";
+      const text = "Check out FreeSets! Your go-to creative preset app.";
+
+      switch(platform) {
+        case 'facebook':
+          window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+          break;
+        case 'twitter':
+          window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`);
+          break;
+        case 'whatsapp':
+          window.open(`https://wa.me/?text=${encodeURIComponent(text + " " + url)}`);
+          break;
+        case 'messenger':
+          window.open(`fb-messenger://share?link=${encodeURIComponent(url)}`);
+          break;
+      }
+    }
+
+    function copyLink() {
+      const link = document.getElementById("shareLink").textContent;
+      navigator.clipboard.writeText(link);
+      alert("Link copied to clipboard!");
+    }
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</body>
+</html>

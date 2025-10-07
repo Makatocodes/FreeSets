@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presets</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <div class="bg-gradient-to-r from-teal-400 to-teal-500 text-white p-4 flex items-center">
+
+    <h1 class="text-lg font-semibold">Presets</h1>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="p-4">
+    <div class="flex items-center bg-white rounded-xl shadow px-3 py-2">
+      <i class="fas fa-search text-gray-400"></i>
+      <input type="text" id="searchInput" placeholder="Search presets, categories..."  
+             class="ml-2 w-full outline-none text-gray-600">
+    </div>
+
+    <!-- Filters -->
+    <div class="flex space-x-3 mt-3 justify-end">
+      <!-- Location Dropdown -->
+      <div class="relative">
+        <button onclick="toggleDropdown('locationDropdown')" 
+          class="flex items-center space-x-2 bg-white shadow rounded-lg px-4 py-2 text-sm text-gray-700">
+          <i class="fas fa-location-dot text-teal-500"></i>
+          <span id="locationLabel">Any</span>
+          <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
+        </button>
+        <div id="locationDropdown" class="hidden absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md z-10">
+          <button onclick="setFilter('locationLabel','Any')" class="block px-4 py-2 text-sm hover:bg-gray-100 w-full text-left">Any</button>
+          <button onclick="setFilter('locationLabel','5 km')" class="block px-4 py-2 text-sm hover:bg-gray-100 w-full text-left">5 km</button>
+          <button onclick="setFilter('locationLabel','10 km')" class="block px-4 py-2 text-sm hover:bg-gray-100 w-full text-left">10 km</button>
+          <button onclick="setFilter('locationLabel','50 km')" class="block px-4 py-2 text-sm hover:bg-gray-100 w-full text-left">50 km</button>
+        </div>
+      </div>
+
+      <!-- Category Dropdown -->
+      <div class="relative">
+        <button onclick="toggleDropdown('categoryDropdown')" 
+          class="flex items-center space-x-2 bg-white shadow rounded-lg px-4 py-2 text-sm text-gray-700">
+          <i class="fas fa-th text-teal-500"></i>
+          <span id="categoryLabel">All</span>
+          <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
+        </button>
+        <div id="categoryDropdown" class="hidden absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md z-10">
+          <button onclick="setFilter('categoryLabel','All')" class="block px-4 py-2 text-sm hover:bg-gray-100 w-full text-left">All</button>
+          <button onclick="setFilter('categoryLabel','Velocity')" class="block px-4 py-2 text-sm hover:bg-gray-100 w-full text-left">Velocity</button>
+          <button onclick="setFilter('categoryLabel','3D')" class="block px-4 py-2 text-sm hover:bg-gray-100 w-full text-left">3D</button>
+          <button onclick="setFilter('categoryLabel','Shake')" class="block px-4 py-2 text-sm hover:bg-gray-100 w-full text-left">Shake</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preset Cards -->
+  <div class="space-y-3 px-4 pb-24">
+
+    <!-- Example Preset Card -->
+    <div class="bg-white rounded-xl shadow p-4 flex items-start space-x-3">
+      <div class="bg-teal-100 text-teal-500 p-3 rounded-lg">
+        <i class="fas fa-bolt text-xl"></i>
+      </div>
+      <div class="flex-1">
+        <h2 class="font-semibold text-gray-800">Velocity Motion Blur</h2>
+        <span class="inline-block bg-blue-500 text-white text-xs px-3 py-1 rounded-full mt-1">Velocity</span>
+        <p class="text-sm text-gray-600 mt-2">
+          <i class="fas fa-user text-gray-400 mr-1"></i> by User123
+        </p>
+        <p class="text-xs text-gray-400">Added on Sept 20, 2025</p>
+        <p class="text-sm italic text-gray-400 mt-1">No reviews</p>
+      </div>
+    </div>
+
+    <!-- Another Preset -->
+    <div class="bg-white rounded-xl shadow p-4 flex items-start space-x-3">
+      <div class="bg-green-100 text-green-500 p-3 rounded-lg">
+        <i class="fas fa-cube text-xl"></i>
+      </div>
+      <div class="flex-1">
+        <h2 class="font-semibold text-gray-800">3D Spin Transition</h2>
+        <span class="inline-block bg-green-500 text-white text-xs px-3 py-1 rounded-full mt-1">3D</span>
+        <p class="text-sm text-gray-600 mt-2">
+          <i class="fas fa-user text-gray-400 mr-1"></i> by PresetMaker
+        </p>
+        <p class="text-xs text-gray-400">Added on Sept 18, 2025</p>
+        <p class="text-sm italic text-gray-400 mt-1">No reviews</p>
+      </div>
+    </div>
+
+    <!-- Another Preset -->
+    <div class="bg-white rounded-xl shadow p-4 flex items-start space-x-3">
+      <div class="bg-purple-100 text-purple-500 p-3 rounded-lg">
+        <i class="fas fa-wave-square text-xl"></i>
+      </div>
+      <div class="flex-1">
+        <h2 class="font-semibold text-gray-800">Shake Impact FX</h2>
+        <span class="inline-block bg-purple-500 text-white text-xs px-3 py-1 rounded-full mt-1">Shake</span>
+        <p class="text-sm text-gray-600 mt-2">
+          <i class="fas fa-user text-gray-400 mr-1"></i> by FXMaster
+        </p>
+        <p class="text-xs text-gray-400">Added on Sept 15, 2025</p>
+        <p class="text-sm italic text-gray-400 mt-1">No reviews</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Nav -->
+  <nav class="fixed bottom-0 w-full bg-black shadow-md border-t flex justify-around items-center py-2">
+    <a href="presets.html" class="nav-item flex flex-col items-center text-teal-500">
+      <i class="fas fa-layer-group text-xl"></i>
+      <span class="text-xs">Presets</span>
+    </a>
+
+    <a href="upload.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-upload text-xl"></i>
+      <span class="text-xs">Upload</span>
+    </a>
+
+    <!-- Centered Home Button -->
+    <a href="freeset.html" class="nav-item relative -mt-8">
+      <div class="bg-teal-500 text-white w-14 h-14 flex items-center justify-center rounded-full shadow-lg border-4 border-white">
+        <i class="fas fa-home text-2xl"></i>
+      </div>
+    </a>
+
+    <a href="favorite.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-heart text-xl"></i>
+      <span class="text-xs">Favorites</span>
+    </a>
+
+    <a href="profile.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-user text-xl"></i>
+      <span class="text-xs">Profile</span>
+    </a>
+  </nav>
+
+  <!-- Script for Active Nav -->
+  <script>
+    const navItems = document.querySelectorAll(".nav-item");
+    navItems.forEach(item => {
+      item.addEventListener("click", function(e) {
+        navItems.forEach(el => el.classList.remove("text-teal-500"));
+        navItems.forEach(el => el.classList.add("text-gray-500"));
+        this.classList.remove("text-gray-500");
+        this.classList.add("text-teal-500");
+      });
+    });
+
+    // Auto focus search bar when page loads
+    window.onload = function() {
+      document.getElementById("searchInput").focus();
+    };
+
+    // Toggle dropdowns
+    function toggleDropdown(id) {
+      document.getElementById(id).classList.toggle("hidden");
+    }
+
+    // Set selected filter
+    function setFilter(labelId, value) {
+      document.getElementById(labelId).innerText = value;
+      // Close all dropdowns
+      document.querySelectorAll('[id$="Dropdown"]').forEach(dd => dd.classList.add("hidden"));
+    }
+
+    // Close dropdown if clicked outside
+    window.onclick = function(event) {
+      if (!event.target.matches('button') && !event.target.closest('div.relative')) {
+        document.querySelectorAll('[id$="Dropdown"]').forEach(dd => dd.classList.add("hidden"));
+      }
+    }
+  </script>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</body>
+</html>

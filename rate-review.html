@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rate & Review</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 flex flex-col h-screen">
+
+  <!-- Header -->
+  <div class="bg-gradient-to-r from-teal-500 to-teal-400 text-white p-4 flex items-center">
+    <button onclick="history.back()" class="mr-3">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h1 class="text-lg font-semibold">Rate & Review</h1>
+  </div>
+
+  <!-- Content -->
+  <div class="flex-1 overflow-y-auto p-4 pb-28">
+    <!-- Logo -->
+    <div class="flex justify-center mb-4">
+      <img src="logo.png" alt="FreeSets Logo" class="w-20 h-20 rounded-full shadow-md">
+    </div>
+
+    <!-- Intro Text -->
+    <div class="text-center mb-4">
+      <h2 class="text-lg font-semibold text-gray-700">Help us improve FreeSets</h2>
+      <p class="text-sm text-gray-500">Share your rating and feedback to make the app even better!</p>
+    </div>
+
+    <!-- Star Rating -->
+    <div class="text-center mb-4">
+      <div id="stars" class="flex justify-center space-x-2 text-3xl text-gray-300 cursor-pointer">
+        <i class="fas fa-star" data-value="1"></i>
+        <i class="fas fa-star" data-value="2"></i>
+        <i class="fas fa-star" data-value="3"></i>
+        <i class="fas fa-star" data-value="4"></i>
+        <i class="fas fa-star" data-value="5"></i>
+      </div>
+      <p id="ratingText" class="mt-2 text-gray-600">Tap to rate</p>
+    </div>
+    <br>
+ <div class="text-lg mb-4">
+      <h2 class="text-lg font-semibold text-gray-700">Any feedbacks to FreeSets? (Optional)</h2>
+
+    </div>
+    <!-- Feedback -->
+    <div class="mb-4">
+      <textarea placeholder="Write your feedback..." 
+                class="w-full border rounded-lg p-3 h-28 focus:ring-2 focus:ring-teal-400 outline-none"></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-center">
+      <button class="bg-teal-500 text-white w-full py-3 rounded-lg shadow-md font-medium hover:bg-teal-600">
+        Submit
+      </button>
+    </div>
+  </div>
+  <!-- Bottom Nav -->
+  <nav class="fixed bottom-0 w-full bg-black shadow-md border-t flex justify-around items-center py-2">
+    <a href="presets.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-layer-group text-xl"></i>
+      <span class="text-xs">Presets</span>
+    </a>
+
+    <a href="upload.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-upload text-xl"></i>
+      <span class="text-xs">Upload</span>
+    </a>
+
+    <!-- Centered Home Button -->
+    <a href="freeset.html" class="nav-item relative -mt-8">
+      <div class="bg-teal-500 text-white w-14 h-14 flex items-center justify-center rounded-full shadow-lg border-4 border-white">
+        <i class="fas fa-home text-2xl"></i>
+      </div>
+    </a>
+
+    <a href="favorite.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-heart text-xl"></i>
+      <span class="text-xs">Favorites</span>
+    </a>
+
+    <!-- profile active -->
+    <a href="profile.html" class="nav-item flex flex-col items-center text-teal-500">
+      <i class="fas fa-user text-xl"></i>
+      <span class="text-xs">Profile</span>
+    </a>
+  </nav>
+
+
+  <!-- Script for Active Nav -->
+  <script>
+    const navItems = document.querySelectorAll(".nav-item");
+    navItems.forEach(item => {
+      item.addEventListener("click", function(e) {
+        navItems.forEach(el => el.classList.remove("text-teal-500"));
+        navItems.forEach(el => el.classList.add("text-gray-500"));
+        this.classList.remove("text-gray-500");
+        this.classList.add("text-teal-500");
+      });
+    });
+
+    // Auto focus search bar when page loads
+    window.onload = function() {
+      document.getElementById("searchInput").focus();
+    };
+
+    // Toggle dropdowns
+    function toggleDropdown(id) {
+      document.getElementById(id).classList.toggle("hidden");
+    }
+
+    // Set selected filter
+    function setFilter(labelId, value) {
+      document.getElementById(labelId).innerText = value;
+      // Close all dropdowns
+      document.querySelectorAll('[id$="Dropdown"]').forEach(dd => dd.classList.add("hidden"));
+    }
+
+    // Close dropdown if clicked outside
+    window.onclick = function(event) {
+      if (!event.target.matches('button') && !event.target.closest('div.relative')) {
+        document.querySelectorAll('[id$="Dropdown"]').forEach(dd => dd.classList.add("hidden"));
+      }
+    }
+  </script>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <script>
+    const stars = document.querySelectorAll('#stars i');
+    const ratingText = document.getElementById('ratingText');
+
+    const texts = {
+      1: "Poor",
+      2: "Fair",
+      3: "Good",
+      4: "Very Good",
+      5: "Excellent"
+    };
+
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const rating = star.getAttribute('data-value');
+        stars.forEach(s => {
+          s.classList.remove('text-yellow-400');
+          if (s.getAttribute('data-value') <= rating) {
+            s.classList.add('text-yellow-400');
+          }
+        });
+        ratingText.textContent = texts[rating];
+      });
+    });
+  </script>
+
+</body>
+</html>

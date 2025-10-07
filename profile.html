@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen">  <!-- Header -->
+ <div class="bg-gradient-to-r from-teal-400 to-teal-500 text-white p-4 flex items-center">
+    <h1 class="text-lg font-semibold">Profile</h1>
+  </div>
+
+
+  <!-- Profile Card -->
+  <div class="px-4 mt-4">
+    <div class="bg-white rounded-xl shadow p-4 flex items-center space-x-3">
+      <div class="bg-teal-100 text-teal-500 rounded-full w-12 h-12 flex items-center justify-center text-2xl">
+        <i class="fas fa-user"></i>
+      </div>
+      <div>
+        <p class="font-semibold text-gray-800">laurenzkhuya@gmail.com</p>
+        <p class="text-sm text-gray-500">Registered User</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu -->
+  <div class="px-4 mt-6 flex-1">
+    <p class="text-gray-600 mb-2 font-medium">Menu</p>
+    <!-- removed divide-y -->
+    <div class="bg-white rounded-xl shadow">
+
+      <a href="rate-review.html" class="flex items-center justify-between p-4">
+        <div class="flex items-center space-x-3">
+          <i class="fas fa-star text-yellow-500"></i>
+          <span>Rate & Review App</span>
+        </div>
+        <i class="fas fa-chevron-right text-gray-400"></i>
+      </a>
+      <a href="language.html" class="flex items-center justify-between p-4">
+        <div class="flex items-center space-x-3">
+          <i class="fas fa-language text-blue-500"></i>
+          <span>Language</span>
+        </div>
+        <i class="fas fa-chevron-right text-gray-400"></i>
+      </a>
+      <a href="#" class="flex items-center justify-between p-4">
+        <div class="flex items-center space-x-3">
+          <i class="fas fa-cog text-gray-600"></i>
+          <span>Settings</span>
+        </div>
+        <i class="fas fa-chevron-right text-gray-400"></i>
+      </a>
+      <a href="#" class="flex items-center justify-between p-4">
+        <div class="flex items-center space-x-3">
+          <i class="fas fa-download text-blue-600"></i>
+          <span>Updates</span>
+        </div>
+        <i class="fas fa-chevron-right text-gray-400"></i>
+      </a>
+      <a href="#" class="flex items-center justify-between p-4">
+        <div class="flex items-center space-x-3">
+          <i class="fas fa-share-alt text-teal-500"></i>
+          <span>Share App</span>
+        </div>
+        <i class="fas fa-chevron-right text-gray-400"></i>
+      </a>
+    </div>
+
+    <!-- Logout Button -->
+    <button class="mt-6 w-full border-2 border-red-500 text-red-500 rounded-xl py-3 font-semibold flex items-center justify-center space-x-2">
+      <i class="fas fa-right-from-bracket"></i>
+      <span>Logout</span>
+    </button>
+
+  </div> 
+  <!-- Bottom Nav -->
+  <nav class="fixed bottom-0 w-full bg-black shadow-md border-t flex justify-around items-center py-2">
+    <a href="presets.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-layer-group text-xl"></i>
+      <span class="text-xs">Presets</span>
+    </a>
+
+    <a href="https://alightcreative.com/am/share/u/jK73E5FcoYO6qUUqiVYftpxb1P43/p/vB83h7UeLe-deecc60c01ea7d91" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-upload text-xl"></i>
+      <span class="text-xs">Upload</span>
+    </a>
+
+    <!-- Centered Home Button -->
+    <a href="freeset.html" class="nav-item relative -mt-8">
+      <div class="bg-teal-500 text-white w-14 h-14 flex items-center justify-center rounded-full shadow-lg border-4 border-white">
+        <i class="fas fa-home text-2xl"></i>
+      </div>
+    </a>
+
+    <a href="favorite.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-heart text-xl"></i>
+      <span class="text-xs">Favorites</span>
+    </a>
+
+    <!-- profile active -->
+    <a href="profile.html" class="nav-item flex flex-col items-center text-teal-500">
+      <i class="fas fa-user text-xl"></i>
+      <span class="text-xs">Profile</span>
+    </a>
+  </nav>
+
+
+  <!-- Script for Active Nav -->
+  <script>
+    const navItems = document.querySelectorAll(".nav-item");
+    navItems.forEach(item => {
+      item.addEventListener("click", function(e) {
+        navItems.forEach(el => el.classList.remove("text-teal-500"));
+        navItems.forEach(el => el.classList.add("text-gray-500"));
+        this.classList.remove("text-gray-500");
+        this.classList.add("text-teal-500");
+      });
+    });
+
+    // Auto focus search bar when page loads
+    window.onload = function() {
+      document.getElementById("searchInput").focus();
+    };
+
+    // Toggle dropdowns
+    function toggleDropdown(id) {
+      document.getElementById(id).classList.toggle("hidden");
+    }
+
+    // Set selected filter
+    function setFilter(labelId, value) {
+      document.getElementById(labelId).innerText = value;
+      // Close all dropdowns
+      document.querySelectorAll('[id$="Dropdown"]').forEach(dd => dd.classList.add("hidden"));
+    }
+
+    // Close dropdown if clicked outside
+    window.onclick = function(event) {
+      if (!event.target.matches('button') && !event.target.closest('div.relative')) {
+        document.querySelectorAll('[id$="Dropdown"]').forEach(dd => dd
+.classList.add("hidden"));
+      }
+    }
+  </script>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</body>
+</html>

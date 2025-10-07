@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language Settings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 flex flex-col h-screen">
+
+  <!-- Header -->
+  <div class="bg-gradient-to-r from-teal-500 to-teal-400 text-white p-4 flex items-center">
+    <button onclick="history.back()" class="mr-3">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h1 class="text-lg font-semibold">Language Settings</h1>
+  </div>
+
+  <!-- Content -->
+  <div class="flex-1 overflow-y-auto p-4 pb-28">
+    <div class="text-center mt-6">
+      <i class="fas fa-language text-teal-500 text-6xl mb-3"></i>
+      <h2 class="text-xl font-semibold text-gray-800">Language</h2>
+      <p class="text-gray-500 text-sm mb-6">Select Language</p>
+    </div>
+
+    <!-- Language Cards -->
+    <div id="englishCard" class="flex justify-between items-center bg-white rounded-2xl p-4 mb-3 shadow cursor-pointer transition">
+      <div class="flex items-center space-x-3">
+        <img src="https://flagcdn.com/w40/us.png" alt="English" class="w-10 h-7 rounded-md">
+        <div class="text-left">
+          <p class="font-semibold text-teal-500">English</p>
+          <p class="text-xs text-gray-500">EN</p>
+        </div>
+      </div>
+      <i id="checkEnglish" class="fas fa-check-circle text-teal-500 text-xl hidden"></i>
+    </div>
+
+    <div id="tagalogCard" class="flex justify-between items-center bg-white rounded-2xl p-4 shadow cursor-pointer transition">
+      <div class="flex items-center space-x-3">
+        <img src="https://flagcdn.com/w40/ph.png" alt="Tagalog" class="w-10 h-7 rounded-md">
+        <div class="text-left">
+          <p class="font-semibold text-gray-800">Tagalog</p>
+          <p class="text-xs text-gray-500">TL</p>
+        </div>
+      </div>
+      <i id="checkTagalog" class="fas fa-check-circle text-teal-500 text-xl hidden"></i>
+    </div>
+
+    <!-- Info Box -->
+    <div class="bg-white p-4 rounded-2xl shadow mt-5 flex items-start space-x-3">
+      <i class="fas fa-info-circle text-blue-500 text-lg mt-0.5"></i>
+      <p class="text-sm text-gray-600 text-left">
+        App interface will switch to your selected language immediately.
+      </p>
+    </div>
+  </div>
+
+  <!-- Bottom Nav -->
+  <nav class="fixed bottom-0 w-full bg-black shadow-md border-t flex justify-around items-center py-2">
+    <a href="presets.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-layer-group text-xl"></i>
+      <span class="text-xs">Presets</span>
+    </a>
+
+    <a href="upload.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-upload text-xl"></i>
+      <span class="text-xs">Upload</span>
+    </a>
+
+    <!-- Centered Home Button -->
+    <a href="freeset.html" class="nav-item relative -mt-8">
+      <div class="bg-teal-500 text-white w-14 h-14 flex items-center justify-center rounded-full shadow-lg border-4 border-white">
+        <i class="fas fa-home text-2xl"></i>
+      </div>
+    </a>
+
+    <a href="favorite.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-heart text-xl"></i>
+      <span class="text-xs">Favorites</span>
+    </a>
+
+    <a href="profile.html" class="nav-item flex flex-col items-center text-teal-500">
+      <i class="fas fa-user text-xl"></i>
+      <span class="text-xs">Profile</span>
+    </a>
+  </nav>
+
+  <!-- Script -->
+  <script>
+    const englishCard = document.getElementById('englishCard');
+    const tagalogCard = document.getElementById('tagalogCard');
+    const checkEnglish = document.getElementById('checkEnglish');
+    const checkTagalog = document.getElementById('checkTagalog');
+
+    // Load saved language
+    const savedLang = localStorage.getItem('selectedLanguage');
+    if (savedLang === 'tagalog') {
+      selectLanguage('tagalog');
+    } else {
+      selectLanguage('english');
+    }
+
+    englishCard.addEventListener('click', () => selectLanguage('english'));
+    tagalogCard.addEventListener('click', () => selectLanguage('tagalog'));
+
+    function selectLanguage(lang) {
+      if (lang === 'english') {
+        englishCard.classList.add('border-l-4', 'border-teal-500', 'bg-teal-50');
+        tagalogCard.classList.remove('border-l-4', 'border-teal-500', 'bg-teal-50');
+        checkEnglish.classList.remove('hidden');
+        checkTagalog.classList.add('hidden');
+      } else {
+        tagalogCard.classList.add('border-l-4', 'border-teal-500', 'bg-teal-50');
+        englishCard.classList.remove('border-l-4', 'border-teal-500', 'bg-teal-50');
+        checkTagalog.classList.remove('hidden');
+        checkEnglish.classList.add('hidden');
+      }
+      localStorage.setItem('selectedLanguage', lang);
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</body>
+</html>

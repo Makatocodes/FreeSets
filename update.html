@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App Updates</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="bg-gray-100 flex flex-col h-screen">
+
+  <!-- Header -->
+  <div class="bg-gradient-to-r from-teal-500 to-teal-400 text-white p-4 flex items-center">
+    <button onclick="history.back()" class="mr-3">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h1 class="text-lg font-semibold">Updates</h1>
+  </div>
+
+  <!-- Content -->
+  <div class="flex-1 overflow-y-auto p-4 pb-28 text-center">
+
+    <!-- Icon -->
+    <div class="flex justify-center mb-3 mt-4">
+      <div class="bg-teal-100 text-teal-500 p-4 rounded-lg">
+        <i class="fas fa-download text-3xl"></i>
+      </div>
+    </div>
+
+    <!-- App Updates Title -->
+    <h2 class="text-xl font-semibold text-gray-800 mb-2">App Updates</h2>
+    <p class="text-gray-500 text-sm mb-6">
+      Stay up to date with the latest features and improvements
+    </p>
+
+    <!-- Version Info -->
+    <div class="flex justify-center gap-12 mb-6">
+      <div>
+        <p class="text-gray-600 text-sm">Current Version</p>
+        <p class="text-lg font-semibold text-gray-900" id="currentVersion">1.0.2</p>
+      </div>
+      <div>
+        <p class="text-gray-600 text-sm">Latest Version</p>
+        <p class="text-lg font-semibold text-gray-900" id="latestVersion">1.0.2</p>
+      </div>
+    </div>
+
+    <!-- Status Card -->
+    <div id="statusCard" class="bg-green-100 text-green-700 rounded-2xl p-4 mx-4 mb-6 shadow-sm">
+      <div class="flex flex-col items-center">
+        <div class="bg-green-500 text-white rounded-full p-3 mb-2">
+          <i class="fas fa-check text-lg"></i>
+        </div>
+        <h3 class="font-semibold text-lg">App is Up to Date</h3>
+        <p class="text-sm text-gray-600">You are running the latest version of FreeSets</p>
+      </div>
+    </div>
+
+    <!-- Check for Updates Button -->
+    <div class="flex justify-center">
+      <button onclick="checkForUpdates()" 
+              class="border border-teal-500 text-teal-500 w-11/12 py-3 rounded-xl font-medium hover:bg-teal-50 flex items-center justify-center gap-2 transition">
+        <i class="fas fa-rotate text-teal-500"></i> 
+        Check for Updates
+      </button>
+    </div>
+
+    <!-- Last Checked -->
+    <p id="lastChecked" class="text-xs text-gray-400 mt-4">
+      Last checked: 10/5/2025 8:32:29 PM
+    </p>
+  </div>
+
+  <!-- Bottom Nav -->
+  <nav class="fixed bottom-0 w-full bg-black shadow-md border-t flex justify-around items-center py-2">
+    <a href="presets.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-layer-group text-xl"></i>
+      <span class="text-xs">Presets</span>
+    </a>
+
+    <a href="upload.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-upload text-xl"></i>
+      <span class="text-xs">Upload</span>
+    </a>
+
+    <!-- Center Home Button -->
+    <a href="freeset.html" class="nav-item relative -mt-8">
+      <div class="bg-teal-500 text-white w-14 h-14 flex items-center justify-center rounded-full shadow-lg border-4 border-white">
+        <i class="fas fa-home text-2xl"></i>
+      </div>
+    </a>
+
+    <a href="favorite.html" class="nav-item flex flex-col items-center text-gray-500">
+      <i class="fas fa-heart text-xl"></i>
+      <span class="text-xs">Favorites</span>
+    </a>
+
+    <!-- Profile Active -->
+    <a href="profile.html" class="nav-item flex flex-col items-center text-teal-500">
+      <i class="fas fa-user text-xl"></i>
+      <span class="text-xs">Profile</span>
+    </a>
+  </nav>
+
+  <!-- Script -->
+  <script>
+    // Check for updates simulation
+    function checkForUpdates() {
+      const statusCard = document.getElementById('statusCard');
+      const current = document.getElementById('currentVersion').innerText;
+      const latest = document.getElementById('latestVersion').innerText;
+      const lastChecked = document.getElementById('lastChecked');
+
+      const now = new Date();
+      lastChecked.innerText = 'Last checked: ' + now.toLocaleString();
+
+      if (current === latest) {
+        statusCard.className = "bg-green-100 text-green-700 rounded-2xl p-4 mx-4 mb-6 shadow-sm";
+        statusCard.innerHTML = `
+          <div class='flex flex-col items-center'>
+            <div class='bg-green-500 text-white rounded-full p-3 mb-2'>
+              <i class='fas fa-check text-lg'></i>
+            </div>
+            <h3 class='font-semibold text-lg'>App is Up to Date</h3>
+            <p class='text-sm text-gray-600'>You are running the latest version of FreeSets</p>
+          </div>`;
+      } else {
+        statusCard.className = "bg-yellow-100 text-yellow-700 rounded-2xl p-4 mx-4 mb-6 shadow-sm";
+        statusCard.innerHTML = `
+          <div class='flex flex-col items-center'>
+            <div class='bg-yellow-500 text-white rounded-full p-3 mb-2'>
+              <i class='fas fa-exclamation text-lg'></i>
+            </div>
+            <h3 class='font-semibold text-lg'>Update Available!</h3>
+            <p class='text-sm text-gray-600'>Tap the button below to update your app.</p>
+          </div>`;
+      }
+    }
+
+    // Bottom nav active state
+    const navItems = document.querySelectorAll(".nav-item");
+    navItems.forEach(item => {
+      item.addEventListener("click", function() {
+        navItems.forEach(el => el.classList.remove("text-teal-500"));
+        navItems.forEach(el => el.classList.add("text-gray-500"));
+        this.classList.remove("text-gray-500");
+        this.classList.add("text-teal-500");
+      });
+    });
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</body>
+</html>
